@@ -1,0 +1,16 @@
+version: '3'
+services:
+
+  ai_search_engine:
+    image: ai_search_engine
+    build: 
+      context: ./ai_search_engine
+      dockerfile: Dockerfile-dev
+    env_file: ".env"
+    container_name: ai_search_engine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai_search_engine:/app # Mount the host code directory into the container
+    environment:
+      - NODE_ENV=development
