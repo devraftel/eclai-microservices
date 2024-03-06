@@ -1,21 +1,22 @@
+# Use the official Python 3.12 base image
 FROM python:3.12-slim
 
-# Set environment variables for Uvicorn configuration
-ENV HOST=0.0.0.0
-ENV PORT=8000
-
+# Set the working directory in the container
 WORKDIR /app
 
-# Install Poetry
+# Copy the Poetry lock file and pyproject.toml file to the container
+COPY pyproject.toml poetry.lock* ./
 
+# Install Poetry and dependencies
 RUN pip install poetry && \
     poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-ansi
 
-# Copy your application code
+# Copy the application code to the container
 COPY . .
 
-EXPOSE $PORT
+# Expose the port on which the FastAPI server will run
+EXPOSE 8000
 
-# Use CMD to start the FastAPI server via Uvicorn, using environment variables
-CMD gunicorn -w 3 -k uvicorn.workers.UvicornWorker app.main:app  --bind 0.0.0.0:8000 --preload --log-level=debug --timeout 120
+# Start the FastAPI server
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
