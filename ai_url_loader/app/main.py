@@ -8,7 +8,7 @@ app = FastAPI()
 async def api_root():
     return {"message": "URL AI Loader API is up and running!"}
 
-@app.get("/ai_url", tags=["URL Loader"], response_model=ProductScrapedBase)
+@app.get("/ai_url", tags=["URL Loader"])
 async def load_and_transform_api(url: str):
     try:
         urls = [url]
