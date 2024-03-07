@@ -23,7 +23,7 @@ schema = {
     "required": ["product_id", "product_title", "company_name", "price", "currency", "image_url", "product_url", "manufacturing_material"],
 }
 
-llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-16k")
+llm = ChatOpenAI(temperature=0, model="gpt-4-turbo-preview")
 
 def extract(content: str, schema: dict):
     return create_extraction_chain(schema=schema, llm=llm).invoke({"input": content})
