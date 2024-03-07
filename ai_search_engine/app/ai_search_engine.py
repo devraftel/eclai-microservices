@@ -9,7 +9,7 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 _: bool = load_dotenv(find_dotenv())
 
-SEED = "Find if the product or product's company have any of the provided eco friendly certifications. In Response tell about each asked Certification and if you are unable to find the data about any eco certification then response by telling no Data is available about that one."
+SEED = "Find if the product or product's company have any of the provided eco friendly certifications. In Response tell about each asked Certification and if you are unable to find the data about any eco certification then response by telling no Data is available about that one. Keep your response consise and logical comment about each certification shall be No more than 60 words. "
 
 tools = [TavilySearchResults(max_results=5)]
 
